@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Entrenamiento - SMARTFIT</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #333;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .btn-add {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn-add:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-add:active {
+            transform: translateY(0);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9ff;
+            border-radius: 12px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .separator {
+            height: 1px;
+            background: #e0e0e0;
+            margin: 20px 0;
+        }
+
+        .ejercicio {
+            background: #f8f9ff;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid #667eea;
+        }
+
+        .ejercicio-info {
+            flex: 1;
+        }
+
+        .ejercicio-nombre {
+            font-weight: 600;
+            color: #333;
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .ejercicio-detalles {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .ejercicio-calorias {
+            font-size: 18px;
+            font-weight: 700;
+            color: #e74c3c;
+            text-align: right;
+        }
+
+        .btn-eliminar {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        .btn-eliminar:hover {
+            background: #c0392b;
+        }
+
+        .lista-ejercicios {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .vacio {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+        }
+
+        .vacio-emoji {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .footer {
+            padding: 15px 20px;
+            background: #f8f9ff;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .btn-limpiar {
+            width: 100%;
+            padding: 10px;
+            background: #e0e0e0;
+            color: #666;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn-limpiar:hover {
+            background: #d0d0d0;
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .content {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💪 Mi Entrenamiento</h1>
+            <p>SMARTFIT - Hoy</p>
+        </div>
+
+        <div class="content">
+            <!-- FORMULARIO -->
+            <div class="input-group">
+                <label>Máquina</label>
+                <select id="maquina">
+                    <option value="">-- Selecciona una máquina --</option>
+                    <option value="Leg Press">Leg Press (Piernas)</option>
+                    <option value="Chest Press">Chest Press (Pecho)</option>
+                    <option value="Lat Pulldown">Lat Pulldown (Espalda)</option>
+                    <option value="Leg Extension">Leg Extension (Cuádriceps)</option>
+                    <option value="Leg Curl">Leg Curl (Isquiotibiales)</option>
+                    <option value="Shoulder Press">Shoulder Press (Hombros)</option>
+                    <option value="Seated Row">Seated Row (Espalda)</option>
+                    <option value="Abdominal Crunch">Abdominal Crunch (Abdominales)</option>
+                    <option value="Chest Fly">Chest Fly (Pecho)</option>
+                    <option value="Back Extension">Back Extension (Espalda)</option>
+                    <option value="Tricep Dip">Tricep Dip (Brazos)</option>
+                    <option value="Bicep Curl">Bicep Curl (Brazos)</option>
+                    <option value="Leg Press Hack">Leg Press Hack (Piernas)</option>
+                    <option value="Smith Machine">Smith Machine (Múltiple)</option>
+                    <option value="Treadmill">Treadmill (Cardio)</option>
+                    <option value="Bicicleta">Bicicleta Estática (Cardio)</option>
+                    <option value="Elíptica">Elíptica (Cardio)</option>
+                </select>
+            </div>
+
+            <div class="input-row">
+                <div class="input-group">
+                    <label>Repeticiones</label>
+                    <input type="number" id="reps" placeholder="12" min="1">
+                </div>
+                <div class="input-group">
+                    <label>Series</label>
+                    <input type="number" id="sets" placeholder="4" min="1">
+                </div>
+            </div>
+
+            <div class="input-row">
+                <div class="input-group">
+                    <label>Tiempo (min)</label>
+                    <input type="number" id="tiempo" placeholder="20" min="1">
+                </div>
+                <div class="input-group">
+                    <label>Calorías</label>
+                    <input type="number" id="calorias" placeholder="120" min="1">
+                </div>
+            </div>
+
+            <button class="btn-add" onclick="agregarEjercicio()">✅ Agregar Ejercicio</button>
+
+            <!-- ESTADÍSTICAS -->
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value" id="totalEjercicos">0</div>
+                    <div class="stat-label">Ejercicios</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="totalCalorias">0</div>
+                    <div class="stat-label">Calorías</div>
+                </div>
+            </div>
+
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value" id="totalTiempo">0</div>
+                    <div class="stat-label">Minutos</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="totalSeries">0</div>
+                    <div class="stat-label">Series</div>
+                </div>
+            </div>
+
+            <div class="separator"></div>
+
+            <!-- LISTA DE EJERCICIOS -->
+            <h3 style="margin-bottom: 12px; color: #333;">Tu entrenamiento hoy</h3>
+            <div class="lista-ejercicios" id="listaEjercicios">
+                <div class="vacio">
+                    <div class="vacio-emoji">🏋️</div>
+                    <p>Comienza a registrar tus ejercicios</p>
+                </div>
+            </div>
+
+            <button class="btn-limpiar" onclick="limpiarTodo()">🗑️ Limpiar todo</button>
+        </div>
+
+        <div class="footer">
+            <p>SMARTFIT GYM TRACKER v2.0 | Hoy: <span id="fechaHoy"></span></p>
+        </div>
+    </div>
+
+    <script>
+        let ejercicios = [];
+
+        // Mostrar fecha
+        const hoy = new Date();
+        const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('fechaHoy').textContent = hoy.toLocaleDateString('es-CO', opciones);
+
+        function agregarEjercicio() {
+            const maquina = document.getElementById('maquina').value;
+            const reps = parseInt(document.getElementById('reps').value);
+            const sets = parseInt(document.getElementById('sets').value);
+            const tiempo = parseInt(document.getElementById('tiempo').value);
+            const calorias = parseInt(document.getElementById('calorias').value);
+
+            if (!maquina || !reps || !sets || !tiempo || !calorias) {
+                alert('⚠️ Por favor completa todos los campos');
+                return;
+            }
+
+            const ejercicio = {
+                id: Date.now(),
+                maquina,
+                reps,
+                sets,
+                tiempo,
+                calorias
+            };
+
+            ejercicios.push(ejercicio);
+            guardarDatos();
+            actualizarPantalla();
+            limpiarFormulario();
+        }
+
+        function eliminarEjercicio(id) {
+            ejercicios = ejercicios.filter(e => e.id !== id);
+            guardarDatos();
+            actualizarPantalla();
+        }
+
+        function actualizarPantalla() {
+            // Actualizar lista
+            const lista = document.getElementById('listaEjercicios');
+
+            if (ejercicios.length === 0) {
+                lista.innerHTML = `
+                    <div class="vacio">
+                        <div class="vacio-emoji">🏋️</div>
+                        <p>Comienza a registrar tus ejercicios</p>
+                    </div>
+                `;
+            } else {
+                lista.innerHTML = ejercicios.map(e => `
+                    <div class="ejercicio">
+                        <div class="ejercicio-info">
+                            <div class="ejercicio-nombre">${e.maquina}</div>
+                            <div class="ejercicio-detalles">
+                                ${e.reps} reps × ${e.sets} sets • ${e.tiempo} min
+                            </div>
+                        </div>
+                        <div>
+                            <div class="ejercicio-calorias">🔥 ${e.calorias}</div>
+                            <button class="btn-eliminar" onclick="eliminarEjercicio(${e.id})">X</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Actualizar estadísticas
+            const totalEjercicos = ejercicios.length;
+            const totalCalorias = ejercicios.reduce((sum, e) => sum + e.calorias, 0);
+            const totalTiempo = ejercicios.reduce((sum, e) => sum + e.tiempo, 0);
+            const totalSeries = ejercicios.reduce((sum, e) => sum + e.sets, 0);
+
+            document.getElementById('totalEjercicos').textContent = totalEjercicos;
+            document.getElementById('totalCalorias').textContent = totalCalorias;
+            document.getElementById('totalTiempo').textContent = totalTiempo;
+            document.getElementById('totalSeries').textContent = totalSeries;
+        }
+
+        function limpiarFormulario() {
+            document.getElementById('maquina').value = '';
+            document.getElementById('reps').value = '';
+            document.getElementById('sets').value = '';
+            document.getElementById('tiempo').value = '';
+            document.getElementById('calorias').value = '';
+            document.getElementById('maquina').focus();
+        }
+
+        function limpiarTodo() {
+            if (confirm('¿Estás seguro? Se eliminarán todos los ejercicios')) {
+                ejercicios = [];
+                gardarDatos();
+                actualizarPantalla();
+            }
+        }
+
+        function guardarDatos() {
+            localStorage.setItem('ejerciciosHoy', JSON.stringify(ejercicios));
+        }
+
+        function cargarDatos() {
+            const datos = localStorage.getItem('ejerciciosHoy');
+            if (datos) {
+                ejercicios = JSON.parse(datos);
+                actualizarPantalla();
+            }
+        }
+
+        // Cargar datos al abrir
+        cargarDatos();
+    </script>
+</body>
+</html>
