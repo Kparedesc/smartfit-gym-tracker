@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMARTFIT GYM TRACKER - Registro de Entrenamientos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+        }
+
+        .header-emoji {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+            margin-bottom: 10px;
+        }
+
+        .header-subtext {
+            font-size: 0.95em;
+            opacity: 0.85;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .description {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #333;
+            line-height: 1.8;
+        }
+
+        .description h2 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .feature {
+            background: #f8f9ff;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border-left: 4px solid #667eea;
+        }
+
+        .feature-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .feature-text {
+            font-size: 13px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin: 30px 0;
+        }
+
+        .btn {
+            padding: 16px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #f0f4ff;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .info-box {
+            background: #f8f9ff;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .info-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: #f8f9ff;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .footer {
+            background: #f8f9ff;
+            padding: 30px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+            font-size: 13px;
+        }
+
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .content {
+                padding: 25px 20px;
+            }
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #667eea, transparent);
+            margin: 30px 0;
+        }
+
+        .version {
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-emoji">💪</div>
+            <h1>SMARTFIT</h1>
+            <h1>GYM TRACKER</h1>
+            <p>Registra tus entrenamientos fácilmente</p>
+            <div class="header-subtext">Para SMARTFIT Colombia</div>
+        </div>
+
+        <div class="content">
+            <div class="description">
+                <h2>¿Qué es SMARTFIT GYM TRACKER?</h2>
+                <p>Una app web simple y rápida para registrar cada ejercicio que realizas en el gimnasio. Sin complicaciones, sin teoría, solo hechos.</p>
+            </div>
+
+            <!-- CARACTERÍSTICAS -->
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-text">Registro en 10 segundos</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-text">Estadísticas automáticas</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📱</div>
+                    <div class="feature-text">Funciona en cualquier dispositivo</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">💾</div>
+                    <div class="feature-text">Se guarda automáticamente</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔒</div>
+                    <div class="feature-text">100% privado y seguro</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🌐</div>
+                    <div class="feature-text">Funciona sin internet</div>
+                </div>
+            </div>
+
+            <!-- ESTADÍSTICAS -->
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number">18+</div>
+                    <div class="stat-label">Máquinas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">♾️</div>
+                    <div class="stat-label">Entrenamientos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">🚀</div>
+                    <div class="stat-label">Libre</div>
+                </div>
+            </div>
+
+            <!-- BOTONES PRINCIPALES -->
+            <div class="buttons">
+                <a href="MiEntrenamiento.html" class="btn btn-primary">🏋️ ABRE LA APP AHORA</a>
+                <a href="Instrucciones_App_Gym.html" class="btn btn-secondary">📖 Ver Instrucciones</a>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- INFO BOX -->
+            <div class="info-box">
+                <div class="info-title">✅ ¿Cómo funciona?</div>
+                <p>1. Selecciona la máquina<br>
+                2. Ingresa: reps, sets, tiempo y calorías<br>
+                3. ¡Listo! Se registra automáticamente<br>
+                4. Ve tus totales en tiempo real</p>
+            </div>
+
+            <div class="info-box">
+                <div class="info-title">🎯 Máquinas disponibles</div>
+                <p>✓ Leg Press  ✓ Chest Press  ✓ Lat Pulldown<br>
+                ✓ Leg Extension  ✓ Shoulder Press  ✓ Seated Row<br>
+                ✓ Cardio (Treadmill, Bicicleta, Elíptica)<br>
+                ✓ Y más...</p>
+            </div>
+
+            <div class="info-box">
+                <div class="info-title">💡 Pro Tip</div>
+                <p>Guarda esta página en favoritos en tu teléfono y úsala directamente en el gimnasio. Solo necesitas internet la primera vez.</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>SMARTFIT GYM TRACKER</strong> v2.0</p>
+            <p style="margin: 10px 0;">Creado con 💜 para tu progreso fitness</p>
+            <p style="margin-top: 15px; font-size: 12px;">
+                <a href="https://github.com/kparedesc/smartfit-gym-tracker" target="_blank">GitHub</a> •
+                <a href="Instrucciones_App_Gym.html">Instrucciones</a> •
+                <a href="MiEntrenamiento.html">App</a>
+            </p>
+            <div class="version">© 2026 SMARTFIT Colombia | Todos los derechos reservados</div>
+        </div>
+    </div>
+</body>
+</html>
