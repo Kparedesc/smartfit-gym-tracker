@@ -588,7 +588,7 @@
                     ejerciciosGuardados: [],
                     entrenamientos: {}
                 };
-                guardarDatos();
+                localStorage.setItem('smartfitData', JSON.stringify(usuariosPorDia));
                 actualizarSelectUsuarios();
                 cerrarModal('modalNuevoUsuario');
                 document.getElementById('inputNombreUsuario').value = '';
@@ -667,7 +667,7 @@
                 calorias
             });
 
-            guardarDatos();
+            localStorage.setItem('smartfitData', JSON.stringify(usuariosPorDia));
             limpiarFormulario();
             actualizarTabla();
 
@@ -718,7 +718,7 @@
             if (confirm('¿Eliminar este registro?')) {
                 const hoy = new Date().toISOString().split('T')[0];
                 usuariosPorDia[usuarioActual].entrenamientos[hoy] = usuariosPorDia[usuarioActual].entrenamientos[hoy].filter(e => e.id !== id);
-                guardarDatos();
+                localStorage.setItem('smartfitData', JSON.stringify(usuariosPorDia));
                 actualizarTabla();
             }
         }
@@ -792,7 +792,7 @@
             }
 
             usuariosPorDia[usuarioActual].ejerciciosGuardados.push({ nombre, reps, sets, tiempo, tipo });
-            guardarDatos();
+            localStorage.setItem('smartfitData', JSON.stringify(usuariosPorDia));
             cerrarModal('modalGuardarPlantilla');
             document.getElementById('inputNombrePlantilla').value = '';
             cargarEjerciciosGuardados();
@@ -807,11 +807,6 @@
         // Modal
         function cerrarModal(id) {
             document.getElementById(id).style.display = 'none';
-        }
-
-        // Guardar
-        function guardarDatos() {
-            localStorage.setItem('smartfitData', JSON.stringify(usuariosPorDia));
         }
 
         // Inicializar
