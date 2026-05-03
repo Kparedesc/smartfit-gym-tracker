@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMARTFIT GYM TRACKER - Instrucciones Completas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            border-left: 5px solid #667eea;
+            padding-left: 15px;
+        }
+
+        .section h3 {
+            color: #764ba2;
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .instruction-step {
+            background: #f8f9ff;
+            border-left: 4px solid #667eea;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+
+        .instruction-step strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .feature-card {
+            background: #f0f4ff;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h4 {
+            color: #667eea;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            margin-bottom: 10px;
+        }
+
+        .feature-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .info-box {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border-left: 5px solid #28a745;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .warning-box {
+            background: #f8d7da;
+            border-left: 5px solid #dc3545;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        table th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table tr:hover {
+            background: #f8f9ff;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+
+        .footer {
+            background: #f8f9ff;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #ddd;
+            color: #666;
+        }
+
+        .quick-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .btn:hover {
+            background: #764ba2;
+        }
+
+        .checklist {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .checklist li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .checklist li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #28a745;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏋️ SMARTFIT GYM TRACKER</h1>
+            <p>Guía Completa de Instrucciones - SMARTFIT Colombia</p>
+        </div>
+
+        <div class="content">
+            <!-- Introducción -->
+            <div class="section">
+                <h2>📱 ¿Qué es SMARTFIT GYM TRACKER?</h2>
+                <p>SMARTFIT GYM TRACKER es una aplicación web profesional diseñada para registrar, monitorear y analizar tu progreso en el gimnasio. Está optimizada especialmente para máquinas Matrix de SMARTFIT Colombia y te permite llevar un control detallado de cada sesión de entrenamiento.</p>
+
+                <div class="success-box">
+                    <strong>✅ Beneficios principales:</strong>
+                    <ul class="checklist">
+                        <li>Registra datos detallados de cada ejercicio (series, repeticiones, tiempo, calorías)</li>
+                        <li>Visualiza tu progreso con gráficos interactivos</li>
+                        <li>Identifica tus récords personales (PRs)</li>
+                        <li>Analiza tendencias semanales y mensuales</li>
+                        <li>Mantén un histórico completo de tus entrenamientos</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Inicio Rápido -->
+            <div class="section">
+                <h2>🚀 Inicio Rápido (5 minutos)</h2>
+
+                <div class="instruction-step">
+                    <strong>Paso 1: Abre la aplicación</strong>
+                    Abre el archivo "SMARTFIT_Gym_Tracker.html" en tu navegador (Chrome, Firefox, Safari, Edge)
+                </div>
+
+                <div class="instruction-step">
+                    <strong>Paso 2: Entender la interfaz</strong>
+                    Verás tres pestañas principales: "TODAY", "HISTORY" y "RECORDS"
+                </div>
+
+                <div class="instruction-step">
+                    <strong>Paso 3: Registra tu primer ejercicio</strong>
+                    En la pestaña "TODAY", completa los campos: Nombre de máquina, repeticiones, series, tiempo y calorías
+                </div>
+
+                <div class="instruction-step">
+                    <strong>Paso 4: Haz clic en "Add Exercise"</strong>
+                    Tu ejercicio aparecerá en la lista de hoy y se actualizarán los gráficos automáticamente
+                </div>
+            </div>
+
+            <!-- Características Detalladas -->
+            <div class="section">
+                <h2>✨ Características Principales</h2>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h4>Panel de Control Diario</h4>
+                    <p><strong>Ubicación:</strong> Pestaña "TODAY"</p>
+                    <p>Registra todos tus ejercicios del día con información completa. El sistema actualiza automáticamente tus métricas totales:</p>
+                    <ul class="checklist">
+                        <li>Número de ejercicios completados</li>
+                        <li>Total de calorías quemadas</li>
+                        <li>Tiempo total de entrenamiento</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h4>Historial Semanal (HISTORY)</h4>
+                    <p><strong>Ubicación:</strong> Pestaña "HISTORY"</p>
+                    <p>Visualiza tu desempeño de la semana con dos gráficos profesionales:</p>
+                    <ul class="checklist">
+                        <li>Gráfico de barras: Calorías quemadas vs Número de ejercicios por día</li>
+                        <li>Gráfico de líneas: Tendencia de calorías diarias</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h4>Récords Personales (RECORDS)</h4>
+                    <p><strong>Ubicación:</strong> Pestaña "RECORDS"</p>
+                    <p>Visualiza tus mejores desempeños por máquina. El sistema rastrea automáticamente:</p>
+                    <ul class="checklist">
+                        <li>Máquina utilizada</li>
+                        <li>Mejor número de repeticiones</li>
+                        <li>Fecha de logro</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🥧</div>
+                    <h4>Gráfico de Distribución de Calorías</h4>
+                    <p><strong>Ubicación:</strong> Pestaña "TODAY", al final</p>
+                    <p>Visualiza qué máquinas quemaron más calorías durante tu sesión. Útil para identificar máquinas más efectivas.</p>
+                </div>
+            </div>
+
+            <!-- Guía de Campos -->
+            <div class="section">
+                <h2>📝 Guía de Campos (Qué registrar)</h2>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Campo</th>
+                                <th>Descripción</th>
+                                <th>Ejemplo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Machine Name</strong></td>
+                                <td>Nombre de la máquina Matrix que usaste</td>
+                                <td>Leg Press, Chest Press, Lat Pulldown</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Reps</strong></td>
+                                <td>Número de repeticiones completadas</td>
+                                <td>12, 15, 20</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sets</strong></td>
+                                <td>Número de series realizadas</td>
+                                <td>3, 4, 5</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Time (min)</strong></td>
+                                <td>Tiempo total en minutos que pasaste en esa máquina</td>
+                                <td>15, 20, 30</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Calories</strong></td>
+                                <td>Calorías aproximadas quemadas en ese ejercicio</td>
+                                <td>100, 150, 200</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box">
+                    <strong>💡 Consejo:</strong> Para estimar calorías, puedes usar la fórmula aproximada: (Intensidad × Tiempo × Peso corporal) / 100. O usa una app de fitness para obtener valores más precisos.
+                </div>
+            </div>
+
+            <!-- Cómo Usar Cada Pestaña -->
+            <div class="section">
+                <h2>🗂️ Guía por Pestaña</h2>
+
+                <h3>📊 Pestaña "TODAY" - Registro Diario</h3>
+                <p><strong>Propósito:</strong> Registra todos tus ejercicios del día actual</p>
+
+                <div class="grid-2">
+                    <div>
+                        <h4>✅ Pasos:</h4>
+                        <ol style="margin-left: 20px;">
+                            <li>Completa los 5 campos (máquina, reps, sets, tiempo, calorías)</li>
+                            <li>Haz clic en "Add Exercise"</li>
+                            <li>El ejercicio aparece en la lista</li>
+                            <li>Los números se actualizan automáticamente</li>
+                            <li>Sigue agregando más ejercicios</li>
+                        </ol>
+                    </div>
+                    <div>
+                        <h4>📊 Qué ves:</h4>
+                        <ul class="checklist">
+                            <li>Tarjetas con cada ejercicio</li>
+                            <li>Métricas totales (arriba)</li>
+                            <li>Gráfico de calorías por máquina</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>📈 Pestaña "HISTORY" - Análisis Semanal</h3>
+                <p><strong>Propósito:</strong> Analizar tu desempeño durante toda la semana</p>
+
+                <div class="grid-2">
+                    <div>
+                        <h4>📊 Gráfico 1: Barras</h4>
+                        <p>Muestra calorías quemadas (naranja) vs número de ejercicios (azul) por cada día de la semana</p>
+                    </div>
+                    <div>
+                        <h4>📉 Gráfico 2: Líneas</h4>
+                        <p>Muestra la tendencia de calorías diarias. Útil para ver si mejoras con el tiempo</p>
+                    </div>
+                </div>
+
+                <div class="success-box">
+                    <strong>✅ Usa esto para:</strong> Identificar tus días más productivos, detectar patrones, motivarte viendo progreso, ajustar tu rutina
+                </div>
+
+                <h3>🏆 Pestaña "RECORDS" - Récords Personales</h3>
+                <p><strong>Propósito:</strong> Seguimiento de tus mejores desempeños</p>
+
+                <div class="instruction-step">
+                    <strong>Información visible:</strong> El sistema muestra automáticamente tus 3 mejores registros con máquina, número de reps y cuándo lo lograste
+                </div>
+
+                <div class="warning-box">
+                    <strong>⚠️ Nota:</strong> Actualmente los PRs están en una lista fija de ejemplo. Con uso regular, el sistema aprenderá tus mejores desempeños automáticamente.
+                </div>
+            </div>
+
+            <!-- Máquinas Matrix Recomendadas -->
+            <div class="section">
+                <h2>🏋️ Máquinas SMARTFIT - Guía de Uso</h2>
+
+                <p>Estas son las máquinas Matrix disponibles en SMARTFIT Colombia y cómo registrarlas:</p>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Máquina</th>
+                                <th>Grupo Muscular</th>
+                                <th>Nombre a Registrar</th>
+                                <th>Reps Típicas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Leg Press</td>
+                                <td>Piernas</td>
+                                <td>Leg Press</td>
+                                <td>10-15</td>
+                            </tr>
+                            <tr>
+                                <td>Chest Press</td>
+                                <td>Pecho</td>
+                                <td>Chest Press</td>
+                                <td>8-12</td>
+                            </tr>
+                            <tr>
+                                <td>Lat Pulldown</td>
+                                <td>Espalda</td>
+                                <td>Lat Pulldown</td>
+                                <td>10-15</td>
+                            </tr>
+                            <tr>
+                                <td>Leg Extension</td>
+                                <td>Cuádriceps</td>
+                                <td>Leg Extension</td>
+                                <td>12-15</td>
+                            </tr>
+                            <tr>
+                                <td>Leg Curl</td>
+                                <td>Isquiotibiales</td>
+                                <td>Leg Curl</td>
+                                <td>10-15</td>
+                            </tr>
+                            <tr>
+                                <td>Shoulder Press</td>
+                                <td>Hombros</td>
+                                <td>Shoulder Press</td>
+                                <td>8-12</td>
+                            </tr>
+                            <tr>
+                                <td>Seated Row</td>
+                                <td>Espalda/Brazos</td>
+                                <td>Seated Row</td>
+                                <td>10-12</td>
+                            </tr>
+                            <tr>
+                                <td>Abdominal Crunch</td>
+                                <td>Abdominales</td>
+                                <td>Abdominal Crunch</td>
+                                <td>15-20</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Mejores Prácticas -->
+            <div class="section">
+                <h2>💪 Mejores Prácticas & Tips</h2>
+
+                <h3>✅ Recomendaciones para Mejor Seguimiento</h3>
+                <ul class="checklist">
+                    <li>Registra datos INMEDIATAMENTE después de cada ejercicio mientras recuerdas los números exactos</li>
+                    <li>Sé consistente con los nombres de las máquinas (usa siempre el mismo nombre)</li>
+                    <li>Intenta mejorar al menos 1 rep por semana en cada máquina</li>
+                    <li>Usa el historial para identificar tu mejor hora de entrenamiento</li>
+                    <li>Revisa tus PRs semanalmente para mantenerte motivado</li>
+                </ul>
+
+                <h3>📱 Uso en el Gimnasio</h3>
+                <ul class="checklist">
+                    <li>Abre la app en tu teléfono (cualquier navegador funciona)</li>
+                    <li>Guarda la página como favorito para acceso rápido</li>
+                    <li>Registra cada máquina mientras estés usando</li>
+                    <li>Los datos se guardan automáticamente en tu dispositivo</li>
+                </ul>
+
+                <h3>🎯 Fijando Metas</h3>
+                <ul class="checklist">
+                    <li>Meta de calorías: Apunta a quemar 300+ calorías por sesión</li>
+                    <li>Meta de consistencia: 5-6 días por semana en el gimnasio</li>
+                    <li>Meta de progresión: Aumenta 1-2 reps cada semana por máquina</li>
+                    <li>Meta de tiempo: 45-60 minutos por sesión</li>
+                </ul>
+            </div>
+
+            <!-- Solución de Problemas -->
+            <div class="section">
+                <h2>🔧 Solución de Problemas</h2>
+
+                <h3>❓ Los datos no se guardan</h3>
+                <div class="instruction-step">
+                    <strong>Solución:</strong> Los datos se guardan en la memoria de tu navegador. Si cierras la ventana, los datos del día actual pueden perderse. Para mantener un historial permanente, toma capturas de pantalla de tus gráficos semanales.
+                </div>
+
+                <h3>❓ Los gráficos no aparecen</h3>
+                <div class="instruction-step">
+                    <strong>Solución:</strong> Actualiza la página (F5 o Cmd+R). Asegúrate de tener JavaScript habilitado en tu navegador. Prueba con un navegador diferente.
+                </div>
+
+                <h3>❓ ¿Cómo elimino un ejercicio?</h3>
+                <div class="instruction-step">
+                    <strong>Solución:</strong> Actualmente no hay botón de eliminar. Si cometes un error, recarga la página y comienza de nuevo (los datos del día se perderán). Para futuras versiones, agregaremos función de edición/eliminación.
+                </div>
+
+                <h3>❓ ¿Puedo acceder desde múltiples dispositivos?</h3>
+                <div class="instruction-step">
+                    <strong>Solución:</strong> Los datos están locales a cada dispositivo. Para sincronizar entre dispositivos, sería necesaria una versión en nube. Por ahora, recomendamos usar un dispositivo principal.
+                </div>
+            </div>
+
+            <!-- Plan de Entrenamiento -->
+            <div class="section">
+                <h2>📅 Plan de Entrenamiento Recomendado</h2>
+
+                <h3>Semana Tipo - Rutina Full Body</h3>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Día</th>
+                                <th>Enfoque</th>
+                                <th>Máquinas Recomendadas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Lunes</strong></td>
+                                <td>Piernas</td>
+                                <td>Leg Press, Leg Extension, Leg Curl</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Martes</strong></td>
+                                <td>Pecho & Hombros</td>
+                                <td>Chest Press, Shoulder Press</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Miércoles</strong></td>
+                                <td>Cardio & Abdominales</td>
+                                <td>Abdominal Crunch, máquinas cardiovasculares</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Jueves</strong></td>
+                                <td>Espalda & Brazos</td>
+                                <td>Lat Pulldown, Seated Row</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Viernes</strong></td>
+                                <td>Full Body</td>
+                                <td>Mezcla de todas las máquinas</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sábado</strong></td>
+                                <td>Descanso o Cardio Ligero</td>
+                                <td>Caminadora, bicicleta estática</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Domingo</strong></td>
+                                <td>Descanso</td>
+                                <td>Recuperación</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box">
+                    <strong>💡 Consejo:</strong> Ajusta según tu disponibilidad. Lo importante es ser consistente con 3-5 sesiones semanales.
+                </div>
+            </div>
+
+            <!-- Preguntas Frecuentes -->
+            <div class="section">
+                <h2>❓ Preguntas Frecuentes</h2>
+
+                <h3>P: ¿Cómo calculo las calorías?</h3>
+                <p><strong>R:</strong> Puedes usar estas aproximaciones o una app especializada:</p>
+                <ul style="margin-left: 20px;">
+                    <li>Máquinas de resistencia: 80-150 calorías por 20 minutos de trabajo intenso</li>
+                    <li>Máquinas cardiovasculares: 150-300 calorías dependiendo de intensidad</li>
+                    <li>Para más precisión: descarga apps como MyFitnessPal o calcula según tu peso corporal</li>
+                </ul>
+
+                <h3>P: ¿Cuál es mi objetivo realista?</h3>
+                <p><strong>R:</strong> Objetivos realistas para 3 meses:</p>
+                <ul style="margin-left: 20px;">
+                    <li>Aumentar 5-10 reps en máquinas principales</li>
+                    <li>Quemar 20,000+ calorías acumuladas</li>
+                    <li>Desarrollar consistencia de 4+ sesiones semanales</li>
+                    <li>Aumentar tiempo promedio de 30 a 45+ minutos</li>
+                </ul>
+
+                <h3>P: ¿Debo aumentar peso cada semana?</h3>
+                <p><strong>R:</strong> No necesariamente. Progresa así:</p>
+                <ul style="margin-left: 20px;">
+                    <li>Semana 1-2: Acostúmbrate al movimiento</li>
+                    <li>Semana 3+: Aumenta reps (objetivo: +1-2 reps/semana)</li>
+                    <li>Cuando logres 15-20 reps: aumenta el peso</li>
+                </ul>
+
+                <h3>P: ¿Es normal estar adolorido?</h3>
+                <p><strong>R:</strong> Sí, durante las primeras 2-3 semanas. El agarre muscular (DOMS) es normal. Verás que disminuye con consistencia.</p>
+            </div>
+
+            <!-- Próximas Características -->
+            <div class="section">
+                <h2>🚀 Próximas Características Planeadas</h2>
+
+                <ul class="checklist">
+                    <li>Exportar datos a Excel/PDF</li>
+                    <li>Sincronización en la nube para múltiples dispositivos</li>
+                    <li>Recordatorios y notificaciones de entrenamiento</li>
+                    <li>Seguimiento de progreso fotográfico</li>
+                    <li>Integración con apps de salud (Apple Health, Google Fit)</li>
+                    <li>Planes de entrenamiento personalizados</li>
+                    <li>Análisis de rendimiento por período</li>
+                    <li>Seguimiento de nutrición integrado</li>
+                </ul>
+            </div>
+
+            <!-- Contacto y Soporte -->
+            <div class="section">
+                <h2>📧 Soporte y Retroalimentación</h2>
+
+                <div class="info-box">
+                    <p><strong>¿Sugerencias o problemas?</strong></p>
+                    <p>Esta es una versión inicial de SMARTFIT GYM TRACKER. Tu retroalimentación es importante para mejorar la app. Si encuentras bugs o tienes ideas, contacta al equipo de desarrollo.</p>
+                </div>
+
+                <div class="success-box">
+                    <p><strong>✅ Gracias por usar SMARTFIT GYM TRACKER</strong></p>
+                    <p>Esperamos que esta herramienta te ayude a alcanzar tus objetivos de fitness. ¡A entrenar se ha dicho!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>SMARTFIT GYM TRACKER v1.0</strong></p>
+            <p>Desarrollado para SMARTFIT Colombia | © 2026 | Todos los derechos reservados</p>
+            <p style="margin-top: 15px; font-size: 0.9em;">Última actualización: Mayo 2026</p>
+        </div>
+    </div>
+</body>
+</html>
