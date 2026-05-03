@@ -170,15 +170,6 @@
             background-color: #b32626;
         }
 
-        .btn-success {
-            background-color: #28a745;
-            color: white;
-        }
-
-        .btn-success:hover {
-            background-color: #218838;
-        }
-
         .stats-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -250,11 +241,6 @@
             cursor: pointer;
         }
 
-        .btn-edit {
-            background-color: #0066cc;
-            color: white;
-        }
-
         .btn-delete {
             background-color: #cc3333;
             color: white;
@@ -316,16 +302,6 @@
             color: #1565c0;
         }
 
-        .warning-box {
-            background-color: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 12px;
-            border-radius: 4px;
-            margin-bottom: 16px;
-            font-size: 13px;
-            color: #856404;
-        }
-
         .success-message {
             background-color: #d4edda;
             color: #155724;
@@ -364,31 +340,12 @@
             .stats-grid {
                 grid-template-columns: 1fr;
             }
-
-            table {
-                font-size: 12px;
-            }
-
-            table th, table td {
-                padding: 8px;
-            }
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 40px 20px;
-            color: #999;
-        }
-
-        .empty-state-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
         }
     </style>
 </head>
 <body>
     <div class="navbar">
-        <h1>SMARTFIT - Sistema de Registro de Entrenamientos</h1>
+        <h1>SMARTFIT - Registro de Entrenamientos</h1>
         <div class="user-selector">
             <label style="color: white; margin: 0;">Usuario:</label>
             <select id="usuarioSelect" onchange="cambiarUsuario()">
@@ -439,7 +396,7 @@
                     <div class="form-group">
                         <label>Máquina</label>
                         <select id="maquinaSelect" onchange="cargarEjercicioGuardado()">
-                            <option value="">-- Crear nueva o seleccionar --</option>
+                            <option value="">-- Seleccionar o crear nueva --</option>
                             <option value="new">Crear nueva máquina</option>
                         </select>
                     </div>
@@ -480,7 +437,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Calorías (Estimado)</label>
+                        <label>Calorías (Automático)</label>
                         <input type="number" id="calorias" placeholder="0" readonly style="background-color: #f5f5f5;">
                     </div>
 
@@ -504,7 +461,7 @@
                     <div id="ejerciciosGuardadosContainer"></div>
 
                     <div style="margin-top: 20px;">
-                        <button class="btn btn-secondary" onclick="mostrarFormEjercicio()" style="width: 100%;">Guardar como Nueva Plantilla</button>
+                        <button class="btn btn-secondary" onclick="mostrarFormEjercicio()" style="width: 100%;">Guardar Plantilla</button>
                     </div>
                 </div>
             </div>
@@ -561,7 +518,7 @@
             <span class="close" onclick="cerrarModal('modalGuardarPlantilla')">&times;</span>
             <h3>Guardar como Plantilla</h3>
             <div class="form-group">
-                <label>Nombre del Ejercicio</label>
+                <label>Nombre de la Plantilla</label>
                 <input type="text" id="inputNombrePlantilla" placeholder="Ej: Mi Leg Press">
             </div>
             <div class="button-group">
@@ -588,7 +545,6 @@
         function actualizarSelectUsuarios() {
             const select = document.getElementById('usuarioSelect');
             select.innerHTML = '<option value="">Seleccionar usuario</option>';
-
             Object.keys(usuariosPorDia).forEach(usuario => {
                 const option = document.createElement('option');
                 option.value = usuario;
@@ -635,12 +591,12 @@
                 guardarDatos();
                 actualizarSelectUsuarios();
                 cerrarModal('modalNuevoUsuario');
-
                 document.getElementById('inputNombreUsuario').value = '';
                 document.getElementById('inputPeso').value = '';
-
                 document.getElementById('usuarioSelect').value = nombre;
                 cambiarUsuario();
+            } else {
+                alert('El usuario ya existe');
             }
         }
 
@@ -665,24 +621,17 @@
             }
 
             let calorias = 0;
-
             if (tipo === 'fuerza') {
-                // Fórmula para máquinas de resistencia
-                // Base: 3-5 calorías por minuto en máquinas de fuerza
                 const volumen = reps * sets;
-                const intensidad = volumen / 10; // Factor de intensidad
+                const intensidad = volumen / 10;
                 calorias = Math.round((tiempo * 4 * intensidad * peso) / 100);
             } else {
-                // Fórmula para cardio
-                // Base: 6-10 calorías por minuto según intensidad
                 calorias = Math.round(tiempo * 7 * peso / 100);
             }
 
-            calorias = Math.max(calorias, 30); // Mínimo 30 calorías
-
+            calorias = Math.max(calorias, 30);
             document.getElementById('calorias').value = calorias;
-            document.getElementById('calorieInfo').innerHTML =
-                `Estimado: ${reps} reps × ${sets} sets = ${reps * sets} repeticiones totales | ${tiempo} min | Peso: ${peso}kg`;
+            document.getElementById('calorieInfo').innerHTML = `Estimado: ${reps * sets} reps totales | ${tiempo} min | Peso: ${peso}kg`;
         }
 
         // Registrar entrenamiento
@@ -694,7 +643,7 @@
             const tiempo = parseInt(document.getElementById('tiempo').value);
             const calorias = parseInt(document.getElementById('calorias').value);
 
-            if (!maquina || maquina === 'new' && !nombreMaquina) {
+            if (!maquina || (maquina === 'new' && !nombreMaquina)) {
                 alert('Por favor selecciona o crea una máquina');
                 return;
             }
@@ -705,7 +654,6 @@
             }
 
             const hoy = new Date().toISOString().split('T')[0];
-
             if (!usuariosPorDia[usuarioActual].entrenamientos[hoy]) {
                 usuariosPorDia[usuarioActual].entrenamientos[hoy] = [];
             }
@@ -750,15 +698,10 @@
                     <td>${e.sets}</td>
                     <td>${e.tiempo}</td>
                     <td>${e.calorias}</td>
-                    <td>
-                        <div class="action-buttons">
-                            <button class="btn-delete" onclick="eliminarEntrenamiento(${e.id})">Eliminar</button>
-                        </div>
-                    </td>
+                    <td><button class="btn-delete" onclick="eliminarEntrenamiento(${e.id})">Eliminar</button></td>
                 </tr>
             `).join('');
 
-            // Actualizar estadísticas
             const totalEjercicios = entrenamientos.length;
             const totalCalorias = entrenamientos.reduce((sum, e) => sum + e.calorias, 0);
             const totalTiempo = entrenamientos.reduce((sum, e) => sum + e.tiempo, 0);
@@ -774,9 +717,8 @@
         function eliminarEntrenamiento(id) {
             if (confirm('¿Eliminar este registro?')) {
                 const hoy = new Date().toISOString().split('T')[0];
-                usuariosPorDia[usuarioActual].entrenamientos[hoy] =
-                    usuariosPorDia[usuarioActual].entrenamientos[hoy].filter(e => e.id !== id);
-                gardarDatos();
+                usuariosPorDia[usuarioActual].entrenamientos[hoy] = usuariosPorDia[usuarioActual].entrenamientos[hoy].filter(e => e.id !== id);
+                guardarDatos();
                 actualizarTabla();
             }
         }
@@ -807,7 +749,7 @@
                 <div style="background: #f9f9f9; padding: 12px; border-radius: 4px; margin-bottom: 10px; cursor: pointer;" onclick="usarPlantilla('${e.nombre}')">
                     <strong>${e.nombre}</strong>
                     <div style="font-size: 12px; color: #666; margin-top: 4px;">
-                        ${e.reps} reps × ${e.sets} sets | ${e.tiempo} min
+                        ${e.reps} reps x ${e.sets} sets | ${e.tiempo} min
                     </div>
                 </div>
             `).join('');
@@ -816,7 +758,8 @@
         // Usar plantilla
         function usarPlantilla(nombre) {
             const ejercicio = usuariosPorDia[usuarioActual].ejerciciosGuardados.find(e => e.nombre === nombre);
-            document.getElementById('maquinaSelect').value = 'plantilla:' + nombre;
+            document.getElementById('maquinaSelect').value = '';
+            document.getElementById('nombreMaquina').value = ejercicio.nombre;
             document.getElementById('reps').value = ejercicio.reps;
             document.getElementById('sets').value = ejercicio.sets;
             document.getElementById('tiempo').value = ejercicio.tiempo;
@@ -824,19 +767,18 @@
             calcularCalorias();
         }
 
-        // Guardar plantilla
+        // Mostrar form ejercicio
         function mostrarFormEjercicio() {
             const reps = document.getElementById('reps').value;
             const sets = document.getElementById('sets').value;
-
             if (!reps || !sets) {
                 alert('Por favor completa reps y sets primero');
                 return;
             }
-
             document.getElementById('modalGuardarPlantilla').style.display = 'block';
         }
 
+        // Guardar plantilla
         function guardarPlantilla() {
             const nombre = document.getElementById('inputNombrePlantilla').value.trim();
             const reps = parseInt(document.getElementById('reps').value);
@@ -849,24 +791,14 @@
                 return;
             }
 
-            usuariosPorDia[usuarioActual].ejerciciosGuardados.push({
-                nombre,
-                reps,
-                sets,
-                tiempo,
-                tipo
-            });
-
-            gardarDatos();
+            usuariosPorDia[usuarioActual].ejerciciosGuardados.push({ nombre, reps, sets, tiempo, tipo });
+            guardarDatos();
             cerrarModal('modalGuardarPlantilla');
             document.getElementById('inputNombrePlantilla').value = '';
             cargarEjerciciosGuardados();
-
-            const select = document.getElementById('maquinaSelect');
-            select.innerHTML += `<option value="plantilla:${nombre}">${nombre}</option>`;
         }
 
-        // Cargar ejercicio guardado
+        // Cargar ejercicio
         function cargarEjercicioGuardado() {
             const valor = document.getElementById('maquinaSelect').value;
             document.getElementById('nuevaMaquinaGroup').style.display = valor === 'new' ? 'block' : 'none';
@@ -877,8 +809,8 @@
             document.getElementById(id).style.display = 'none';
         }
 
-        // Guardar datos
-        function gardarDatos() {
+        // Guardar
+        function guardarDatos() {
             localStorage.setItem('smartfitData', JSON.stringify(usuariosPorDia));
         }
 
